@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import SeasonDisplay from './seasonDisplay'
+import Loader from './loader'
 class App extends React.Component{
 
     // constructor(props) {
@@ -39,21 +40,29 @@ class App extends React.Component{
     //     console.log('My component just updated')
     // }
 
-    render(){
-        // conditional rendering
+    renderContent(){
+         // conditional rendering
        if(this.state.errorMessaage && !this.state.lat){
 
-           return (<div>Error:{this.state.errorMessaage}</div>)
+            return (<div>Error:{this.state.errorMessaage}</div>)
 
-       } else if(this.state.lat && !this.state.errorMessaage){
+        } else if(this.state.lat && !this.state.errorMessaage){
 
-           return(<SeasonDisplay lat={this.state.lat}/>)
+            return(<SeasonDisplay lat={this.state.lat}/>)
 
-       } else{
+        } else{
 
-           return (<div>Loading</div>) 
+            return (<Loader message="Please accept location request"/>) 
 
-       }
+        }
+    }
+
+    render(){
+       return (
+           <div>
+           {this.renderContent()}
+           </div>
+           )
     }
 }
 
